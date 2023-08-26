@@ -49,16 +49,16 @@ class HomePage extends StatelessWidget {
                  height: kSP30x,
                ),
 
-               ///Movie by Genres Session
-              Container(
-                margin: const EdgeInsets.symmetric(
-                    horizontal: kSP10x, vertical: kSP10x),
-                height: kMovieByGenresHeight,
-                child: const MovieByGenreItemView(),
-              ),
-              const SizedBox(
-                height: kSP30x,
-              ),
+              //  ///Movie by Genres Session
+              // Container(
+              //   margin: const EdgeInsets.symmetric(
+              //       horizontal: kSP10x, vertical: kSP10x),
+              //   height: kMovieByGenresHeight,
+              //   child: const MovieByGenreItemView(),
+              // ),
+              // const SizedBox(
+              //   height: kSP30x,
+              // ),
             ],
           ),
         ),
