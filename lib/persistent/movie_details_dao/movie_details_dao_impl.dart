@@ -1,32 +1,27 @@
 import 'package:hive/hive.dart';
+import 'package:movies_database/constant/hive_constant.dart';
+import 'package:movies_database/data/vos/movies_details_vo/movie_details_vo.dart';
+import 'package:movies_database/persistent/movie_details_dao/movie_details_dao.dart';
 
-import '../../constant/hive_constant.dart';
-import '../../data/vos/movies_details_vo/movie_details_vo.dart';
-import 'movie_details_dao.dart';
+class MovieDetailsDaoImpl extends MovieDetailsDAO {
+  /// Box
+  Box<MovieDetailsVO> _getMovieDetailsBox() =>
+      Hive.box<MovieDetailsVO>(kBoxNameForActorDetailsVO);
 
-class MovieDetailsDAOImpl extends MovieDetailsDAO {
-  MovieDetailsDAOImpl._();
-
-  static final MovieDetailsDAOImpl _singleton = MovieDetailsDAOImpl._();
-
-  factory MovieDetailsDAOImpl() => _singleton;
-
-  @override
-  MovieDetailsVO? getMoviesDetailsByMovieID(int movieID) =>
-      _getMovieDetailsBox().get(movieID);
-
-  @override
-  Stream<MovieDetailsVO?> getMoviesDetailsMovieIDStream(int movieID) =>
-      Stream.value(getMoviesDetailsByMovieID(movieID));
-
+  ///
   @override
   void save(MovieDetailsVO movieDetailsVO) {
     _getMovieDetailsBox().put(movieDetailsVO.id, movieDetailsVO);
   }
 
   @override
-  Stream watchMovieDetailsBox() => _getMovieDetailsBox().watch();
+  MovieDetailsVO? getMovieDetailVOFromDatabase(int movieID) =>
+      _getMovieDetailsBox().get(movieID);
 
-  Box<MovieDetailsVO> _getMovieDetailsBox() =>
-      Hive.box<MovieDetailsVO>(kBoxNameForMovieDetailsVO);
+  @override
+  Stream<MovieDetailsVO?> getMovieDetailsVOFromDatabaseStream(int movieID) =>
+      Stream.value(getMovieDetailVOFromDatabase(movieID));
+
+  @override
+  Stream watchMovieDetailsBox() => _getMovieDetailsBox().watch();
 }

@@ -11,12 +11,13 @@ class HomePageBloc extends ChangeNotifier {
   final ScrollController _controllerForGenreMovies = ScrollController();
 
   /// State variable
-  final bool _isDispose = false;
+  bool _isDispose = false;
   List<MovieVO>? _bannerMovieList = [];
   List<MovieVO>? _genreMovieList = [];
   List<GenreVO>? _genreMovieType = [];
 
-  ScrollController get getControllerForGenreMovies => _controllerForGenreMovies;
+  int _pageForGenreMovie = 1;
+  int genreID = 0;
 
   /// Getter
   List<MovieVO>? get getBannerMovieList => _bannerMovieList;
@@ -25,9 +26,7 @@ class HomePageBloc extends ChangeNotifier {
 
   List<GenreVO>? get getGenreMovieType => _genreMovieType;
 
-  ///
-  int _pageForGenreMovie = 1;
-  int genreID = 0;
+  ScrollController get getControllerForGenreMovies => _controllerForGenreMovies;
 
   /// Bloc
   HomePageBloc() {
@@ -35,7 +34,7 @@ class HomePageBloc extends ChangeNotifier {
     _apply.getGenresListFromNetwork();
 
     /// listen genre list from database
-    _apply.getGenresListFromNetworkFromDataBase().listen((event) {
+    _apply.getGenresListFromDataBase().listen((event) {
       if (event != null && event.isNotEmpty) {
         _genreMovieType = event;
       }
@@ -45,7 +44,7 @@ class HomePageBloc extends ChangeNotifier {
     /// listen movies by genre id from database
     _apply.getMovieListByGenresIDFromDataBase().listen((event) {
       if (event != null && event.isNotEmpty) {
-        _bannerMovieList = event.take(10).toList();
+        _bannerMovieList = event.take(5).toList();
         _genreMovieList = event;
       }
       notifyListeners();
@@ -88,6 +87,7 @@ class HomePageBloc extends ChangeNotifier {
   @override
   void dispose() {
     super.dispose();
+    _isDispose=true;
     _controllerForGenreMovies.dispose();
   }
 }

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:movies_database/constant/api_constant.dart';
 import 'package:movies_database/data/vos/genre_vo/genre_vo.dart';
 import 'package:movies_database/data/vos/movie_vo/movie_vo.dart';
+import 'package:movies_database/data/vos/movies_details_vo/movie_details_vo.dart';
 import 'package:movies_database/network/api/movie_database_api.dart';
 import 'package:movies_database/network/data_agent/tmdb_data_agent.dart';
 
@@ -36,4 +37,9 @@ class MovieDataAgentImpl extends MovieDataAgent {
       .asStream()
       .map((event) => event.results)
       .first;
+
+  @override
+  Future<MovieDetailsVO?> getMovieDetailsVO(int movieID) =>
+    _movieApi.getMovieDetailsResponse(kApiToken, movieID);
+
 }

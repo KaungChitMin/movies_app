@@ -75,7 +75,9 @@
 // }
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
+
 import '../../constant/api_constant.dart';
+import '../../data/vos/movies_details_vo/movie_details_vo.dart';
 import '../response/genre_response/genre_response.dart';
 import '../response/movie_response/movie_response.dart';
 
@@ -100,4 +102,10 @@ abstract class MovieDBApi {
       @Query(kQueryParamsWithGenres) int genreID,
       @Query(kQueryParamsApiKey) String apiKey,
       @Query(kQueryParamsPage) int page);
+
+  @GET(kMovieDetailsEndPoint)
+  Future<MovieDetailsVO> getMovieDetailsResponse(
+    @Query(kQueryParamsApiKey) String apiKey,
+    @Query(kPathParameterForMovieID) int movieID,
+  );
 }

@@ -3,6 +3,7 @@ import 'package:movies_database/pages/search_page.dart';
 import 'package:movies_database/utils/bloc_extension_utils.dart';
 import 'package:movies_database/view_items/home_page_view_items/gernre_list_view_item.dart';
 import 'package:provider/provider.dart';
+
 import '../bloc/home_page_bloc.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
@@ -34,31 +35,32 @@ class HomePage extends StatelessWidget {
 
               ///Genres List Session
               Container(
-                  margin: const EdgeInsets.symmetric(horizontal: kSP10x,vertical: kSP20x),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: kSP10x, vertical: kSP20x),
                   child: const GenreMovieTypeItemView()),
               const SizedBox(
                 height: kSP20x,
               ),
 
               ///Banner Session
-             const SizedBox(
-                 height: 250,
-                 width: double.infinity,
-                 child:  BannerMovieItemView()),
-               const SizedBox(
-                 height: kSP30x,
-               ),
+              const SizedBox(
+                  height: 250,
+                  width: double.infinity,
+                  child: BannerMovieItemView()),
+              const SizedBox(
+                height: kSP30x,
+              ),
 
-              //  ///Movie by Genres Session
-              // Container(
-              //   margin: const EdgeInsets.symmetric(
-              //       horizontal: kSP10x, vertical: kSP10x),
-              //   height: kMovieByGenresHeight,
-              //   child: const MovieByGenreItemView(),
-              // ),
-              // const SizedBox(
-              //   height: kSP30x,
-              // ),
+              ///Movie by Genres Session
+              Container(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: kSP20x, vertical: kSP10x),
+                height: kMovieByGenresHeight,
+                child: const GenreMovieListItemView(),
+              ),
+              const SizedBox(
+                height: kSP30x,
+              ),
             ],
           ),
         ),

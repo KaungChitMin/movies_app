@@ -1,3 +1,3 @@
 class AssetsImagesUtils {
-  static String backgroundImageUtil = 'bgImage.jpeg';
+  static String backgroundImageUtil = 'assets/images.jpeg';
 }

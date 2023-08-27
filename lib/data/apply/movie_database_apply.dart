@@ -71,6 +71,7 @@
 
 import '../vos/genre_vo/genre_vo.dart';
 import '../vos/movie_vo/movie_vo.dart';
+import '../vos/movies_details_vo/movie_details_vo.dart';
 
 abstract class MovieDatabaseApply{
   /// From Network
@@ -80,6 +81,8 @@ abstract class MovieDatabaseApply{
 
   Future<List<GenreVO>?> getGenresListFromNetwork();
 
+  Future<MovieDetailsVO?> getMovieDetailsVoFromNetwork(int movieID);
+
   /// From DataBase
   void save(String query);
 
@@ -87,9 +90,11 @@ abstract class MovieDatabaseApply{
 
   Stream<List<MovieVO>?> getMovieListByGenresIDFromDataBase();
 
-  Stream<List<GenreVO>?> getGenresListFromNetworkFromDataBase();
+  Stream<List<GenreVO>?> getGenresListFromDataBase();
 
   String getGenreListByID(List<int> genresID);
+
+  Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID);
 
   ///Clear Box
   void clearMoviesBox();

@@ -50,10 +50,11 @@ class GenreVOAdapter extends TypeAdapter<GenreVO> {
 GenreVO _$GenreVOFromJson(Map<String, dynamic> json) => GenreVO(
       json['id'] as int?,
       json['name'] as String?,
+      isSelect: json['isSelect'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$GenreVOToJson(GenreVO instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-
+      'isSelect': instance.isSelect,
     };
