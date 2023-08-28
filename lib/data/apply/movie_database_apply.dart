@@ -2,7 +2,7 @@
 // import '../vos/actor_vo/actor_vo.dart';
 // import '../vos/credit_vo/cast_vo/cast_vo.dart';
 // import '../vos/credit_vo/cast_vo/crew_vo.dart';
-// import '../vos/genre_vo/genre_vo.dart';
+// import '../vos/genre_vo/genres_vo.dart';
 // import '../vos/movie_vo/movie_vo.dart';
 // import '../vos/movies_details_vo/movie_details_vo.dart';
 //

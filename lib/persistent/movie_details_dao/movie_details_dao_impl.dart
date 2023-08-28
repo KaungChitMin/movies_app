@@ -4,6 +4,12 @@ import 'package:movies_database/data/vos/movies_details_vo/movie_details_vo.dart
 import 'package:movies_database/persistent/movie_details_dao/movie_details_dao.dart';
 
 class MovieDetailsDaoImpl extends MovieDetailsDAO {
+  MovieDetailsDaoImpl._();
+
+  static final MovieDetailsDaoImpl _singleton = MovieDetailsDaoImpl._();
+
+  factory MovieDetailsDaoImpl() => _singleton;
+
   /// Box
   Box<MovieDetailsVO> _getMovieDetailsBox() =>
       Hive.box<MovieDetailsVO>(kBoxNameForActorDetailsVO);

@@ -19,79 +19,85 @@ class MovieDetailsVOAdapter extends TypeAdapter<MovieDetailsVO> {
     return MovieDetailsVO(
       fields[0] as bool?,
       fields[1] as String?,
-      fields[2] as int?,
-      (fields[3] as List?)?.cast<GenreVO>(),
-      fields[4] as String?,
-      fields[5] as int?,
-      fields[6] as String?,
+      fields[2] as BelongsToCollectionVO?,
+      fields[3] as int?,
+      (fields[4] as List?)?.cast<GenresVO>(),
+      fields[5] as String?,
+      fields[6] as int?,
       fields[7] as String?,
       fields[8] as String?,
       fields[9] as String?,
-      fields[10] as double?,
-      fields[11] as String?,
-      (fields[12] as List?)?.cast<ProductionCompaniesVO>(),
-      (fields[13] as List?)?.cast<ProductionCountriesVO>(),
-      fields[14] as String?,
-      fields[15] as int?,
+      fields[10] as String?,
+      fields[11] as double?,
+      fields[12] as String?,
+      (fields[13] as List?)?.cast<ProductionCompaniesVO>(),
+      (fields[14] as List?)?.cast<ProductionCountriesVO>(),
+      fields[15] as String?,
       fields[16] as int?,
-      fields[17] as String?,
-      fields[18] as String?,
+      fields[17] as int?,
+      (fields[18] as List?)?.cast<SpokenLanguagesVO>(),
       fields[19] as String?,
-      fields[20] as bool?,
-      fields[21] as num?,
-      fields[22] as int?,
+      fields[20] as String?,
+      fields[21] as String?,
+      fields[22] as bool?,
+      fields[23] as double?,
+      fields[24] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MovieDetailsVO obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(25)
       ..writeByte(0)
       ..write(obj.adult)
       ..writeByte(1)
       ..write(obj.backdropPath)
       ..writeByte(2)
-      ..write(obj.budget)
+      ..write(obj.belongsToCollection)
       ..writeByte(3)
-      ..write(obj.genres)
+      ..write(obj.budget)
       ..writeByte(4)
-      ..write(obj.homepage)
+      ..write(obj.genres)
       ..writeByte(5)
-      ..write(obj.id)
+      ..write(obj.homepage)
       ..writeByte(6)
-      ..write(obj.imdbId)
+      ..write(obj.id)
       ..writeByte(7)
-      ..write(obj.originalLanguage)
+      ..write(obj.imdbId)
       ..writeByte(8)
-      ..write(obj.originalTitle)
+      ..write(obj.originalLanguage)
       ..writeByte(9)
-      ..write(obj.overview)
+      ..write(obj.originalTitle)
       ..writeByte(10)
-      ..write(obj.popularity)
+      ..write(obj.overview)
       ..writeByte(11)
-      ..write(obj.posterPath)
+      ..write(obj.popularity)
       ..writeByte(12)
-      ..write(obj.productionCompanies)
+      ..write(obj.posterPath)
       ..writeByte(13)
-      ..write(obj.productionCountries)
+      ..write(obj.productionCompanies)
       ..writeByte(14)
-      ..write(obj.releaseDate)
+      ..write(obj.productionCountries)
       ..writeByte(15)
-      ..write(obj.revenue)
+      ..write(obj.releaseDate)
       ..writeByte(16)
-      ..write(obj.runtime)
+      ..write(obj.revenue)
       ..writeByte(17)
-      ..write(obj.status)
+      ..write(obj.runtime)
       ..writeByte(18)
-      ..write(obj.tagline)
+      ..write(obj.spokenLanguages)
       ..writeByte(19)
-      ..write(obj.title)
+      ..write(obj.status)
       ..writeByte(20)
-      ..write(obj.video)
+      ..write(obj.tagline)
       ..writeByte(21)
-      ..write(obj.voteAverage)
+      ..write(obj.title)
       ..writeByte(22)
+      ..write(obj.video)
+      ..writeByte(23)
+      ..write(obj.voteAverage)
+      ..writeByte(24)
       ..write(obj.voteCount);
   }
 
@@ -114,9 +120,13 @@ MovieDetailsVO _$MovieDetailsVOFromJson(Map<String, dynamic> json) =>
     MovieDetailsVO(
       json['adult'] as bool?,
       json['backdrop_path'] as String?,
+      json['belongs_to_collection'] == null
+          ? null
+          : BelongsToCollectionVO.fromJson(
+              json['belongs_to_collection'] as Map<String, dynamic>),
       json['budget'] as int?,
       (json['genres'] as List<dynamic>?)
-          ?.map((e) => GenreVO.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => GenresVO.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['homepage'] as String?,
       json['id'] as int?,
@@ -137,11 +147,14 @@ MovieDetailsVO _$MovieDetailsVOFromJson(Map<String, dynamic> json) =>
       json['release_date'] as String?,
       json['revenue'] as int?,
       json['runtime'] as int?,
+      (json['spoken_languages'] as List<dynamic>?)
+          ?.map((e) => SpokenLanguagesVO.fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['status'] as String?,
       json['tagline'] as String?,
       json['title'] as String?,
       json['video'] as bool?,
-      json['vote_average'] as num?,
+      (json['vote_average'] as num?)?.toDouble(),
       json['vote_count'] as int?,
     );
 
@@ -149,6 +162,7 @@ Map<String, dynamic> _$MovieDetailsVOToJson(MovieDetailsVO instance) =>
     <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
+      'belongs_to_collection': instance.belongsToCollection,
       'budget': instance.budget,
       'genres': instance.genres,
       'homepage': instance.homepage,
@@ -164,6 +178,7 @@ Map<String, dynamic> _$MovieDetailsVOToJson(MovieDetailsVO instance) =>
       'release_date': instance.releaseDate,
       'revenue': instance.revenue,
       'runtime': instance.runtime,
+      'spoken_languages': instance.spokenLanguages,
       'status': instance.status,
       'tagline': instance.tagline,
       'title': instance.title,

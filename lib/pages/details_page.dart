@@ -15,7 +15,7 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<DetailsPageBLoc>(
         create: (_) => DetailsPageBLoc(movieID),
         child: Scaffold(
           backgroundColor: kPrimaryBackgroundColor,

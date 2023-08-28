@@ -1,4 +1,4 @@
-// import 'package:movies_database/data/vos/genre_vo/genre_vo.dart';
+// import 'package:movies_database/data/vos/genre_vo/genres_vo.dart';
 // import 'package:movies_database/network/data_agent/tmdb_data_agent_impl.dart';
 // import 'package:movies_database/persistent/genre_dao/genre_dao.dart';
 // import 'package:movies_database/persistent/genre_dao/genre_dao_impl.dart';
@@ -201,13 +201,12 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       _genreDAO.getGenresListByID(genresID);
 
   @override
-  Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID) {
-    return _movieDetailsDAO
+  Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID) =>
+     _movieDetailsDAO
         .watchMovieDetailsBox()
-        .startWith(
-            _movieDetailsDAO.getMovieDetailsVOFromDatabaseStream(movieID))
+        .startWith(_movieDetailsDAO.getMovieDetailsVOFromDatabaseStream(movieID))
         .map((event) => _movieDetailsDAO.getMovieDetailVOFromDatabase(movieID));
-  }
+
 
   /// clear movie box
 

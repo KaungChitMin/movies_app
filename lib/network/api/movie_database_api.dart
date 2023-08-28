@@ -103,6 +103,15 @@ abstract class MovieDBApi {
       @Query(kQueryParamsApiKey) String apiKey,
       @Query(kQueryParamsPage) int page);
 
+  @GET(kTopRatedMoviesEndPoint)
+  Future<MovieResponse> getTopRatedMovies(
+      @Query(kQueryParamsApiKey) apiKey, @Query(kQueryParamsPage) int page);
+
+  @GET(kGetPopularMoviesEndPoint)
+  Future<MovieResponse> getPopularMovies(
+      @Query(kQueryParamsApiKey) String apiKey,
+      @Query(kQueryParamsPage) int page);
+
   @GET(kMovieDetailsEndPoint)
   Future<MovieDetailsVO> getMovieDetailsResponse(
     @Query(kQueryParamsApiKey) String apiKey,
