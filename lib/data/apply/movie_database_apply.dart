@@ -81,6 +81,10 @@ abstract class MovieDatabaseApply{
 
   Future<List<GenreVO>?> getGenresListFromNetwork();
 
+  Future <List<MovieVO>?> getTopRatedMoviesFromNetwork(int page);
+
+  Future <List<MovieVO>?> getPopularMoviesFromNetwork(int page);
+
   Future<MovieDetailsVO?> getMovieDetailsVoFromNetwork(int movieID);
 
   /// From DataBase
@@ -93,6 +97,11 @@ abstract class MovieDatabaseApply{
   Stream<List<GenreVO>?> getGenresListFromDataBase();
 
   String getGenreListByID(List<int> genresID);
+
+  Stream <List<MovieVO>?> getTopRatedMoviesFromDataBaseStream(int page);
+
+  Stream <List<MovieVO>?> getPopularMoviesFromDataBaseStream(int page);
+
 
   Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID);
 

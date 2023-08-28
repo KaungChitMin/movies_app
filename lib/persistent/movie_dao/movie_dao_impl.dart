@@ -14,7 +14,7 @@ class MovieDaoImpl extends MovieDAO {
   /// Box
   Box<MovieVO> _getMovieBox() => Hive.box(kBoxNameForMovieVO);
 
-  ///
+  /// Database
   @override
   void save(List<MovieVO> movies) {
     int order = 0;
@@ -39,26 +39,55 @@ class MovieDaoImpl extends MovieDAO {
   }
 
   @override
+  List<MovieVO>? getTopRatedMoviesFromDatabase() {
+    final movieList = _getMovieBox().values.toList();
+    movieList.sort((a, b) => a.order.compareTo(b.order));
+    return movieList
+        .where((element) => element.isGetNowPlaying ?? false)
+        .toList();
+  }
+
+  @override
+  List<MovieVO>? getPopularMoviesFromDatabase() {
+    final movieList = _getMovieBox().values.toList();
+    movieList.sort((a, b) => a.order.compareTo(b.order));
+    return movieList
+        .where((element) => element.isPopularMovies ?? false)
+        .toList();
+  }
+
+  /// Database Stream
+  @override
   Stream<List<MovieVO>?> getMovieListByGenreIDFromDataBaseStream() =>
       Stream.value(getMovieListByGenreIDFromDataBase());
-  
+
+  @override
+  Stream<List<MovieVO>?> getTopRatedMoviesFromDatabaseStream() =>
+      Stream.value(getTopRatedMoviesFromDatabase());
+
+  @override
+  Stream<List<MovieVO>?> getPopularMoviesFromDatabaseStream()=>
+      Stream.value(getPopularMoviesFromDatabase());
+
+  /// Watch box and Clear box
   @override
   Stream watchMovieBox() => _getMovieBox().watch();
 
   @override
-  void clearMoviesBox() =>_getMovieBox().clear();
-  
-  
+  void clearMoviesBox() => _getMovieBox().clear();
+
   @override
   void clearMoviesByGenresID() {
     final movieList = _getMovieBox().values.toList();
-    final movieId = movieList.where((element) =>
-    element.isMoviesByGenres ?? false)
-    .map((e) => e.id)
-    .toList();
-    
-    for(int? id in movieId){
+    final movieId = movieList
+        .where((element) => element.isMoviesByGenres ?? false)
+        .map((e) => e.id)
+        .toList();
+
+    for (int? id in movieId) {
       _getMovieBox().delete(id);
     }
   }
+
+
 }

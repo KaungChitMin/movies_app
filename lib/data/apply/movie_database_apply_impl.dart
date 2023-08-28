@@ -163,6 +163,34 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       });
 
   @override
+  Future<List<MovieVO>?> getTopRatedMoviesFromNetwork(int page) =>
+      _dataAgent.getTopRattedMovies(page).then((value) {
+        if (value != null) {
+          var temp = value;
+          temp = temp.map((e) {
+            e.isGetNowPlaying = true;
+            return e;
+          }).toList();
+          _movieDao.save(temp);
+        }
+        return value;
+      });
+
+  @override
+  Future<List<MovieVO>?> getPopularMoviesFromNetwork(int page) =>
+      _dataAgent.getPopularMovies(page).then((value) {
+        if (value != null) {
+          var temp = value;
+          temp = temp.map((e) {
+            e.isPopularMovies = true;
+            return e;
+          }).toList();
+          _movieDao.save(temp);
+        }
+        return value;
+      });
+
+  @override
   Future<MovieDetailsVO?> getMovieDetailsVoFromNetwork(int movieID) =>
       _dataAgent.getMovieDetailsVO(movieID).then((value) {
         if (value != null) {
@@ -201,12 +229,29 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       _genreDAO.getGenresListByID(genresID);
 
   @override
-  Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID) =>
-     _movieDetailsDAO
-        .watchMovieDetailsBox()
-        .startWith(_movieDetailsDAO.getMovieDetailsVOFromDatabaseStream(movieID))
-        .map((event) => _movieDetailsDAO.getMovieDetailVOFromDatabase(movieID));
+  Stream<List<MovieVO>?> getTopRatedMoviesFromDataBaseStream(int page) {
+    return _movieDao
+        .watchMovieBox()
+        .startWith(_movieDao.getTopRatedMoviesFromDatabaseStream())
+        .map((event) => _movieDao.getTopRatedMoviesFromDatabase());
+  }
 
+  @override
+  Stream<List<MovieVO>?> getPopularMoviesFromDataBaseStream(int page) {
+    return _movieDao
+        .watchMovieBox()
+        .startWith(_movieDao.getPopularMoviesFromDatabaseStream())
+        .map((event) => _movieDao.getPopularMoviesFromDatabase());
+  }
+
+  @override
+  Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID) =>
+      _movieDetailsDAO
+          .watchMovieDetailsBox()
+          .startWith(
+              _movieDetailsDAO.getMovieDetailsVOFromDatabaseStream(movieID))
+          .map((event) =>
+              _movieDetailsDAO.getMovieDetailVOFromDatabase(movieID));
 
   /// clear movie box
 

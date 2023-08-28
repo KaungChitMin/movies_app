@@ -5,7 +5,15 @@ abstract class MovieDAO {
 
   List<MovieVO>? getMovieListByGenreIDFromDataBase();
 
+  List<MovieVO>? getTopRatedMoviesFromDatabase();
+
+  List<MovieVO>? getPopularMoviesFromDatabase();
+
   Stream<List<MovieVO>?> getMovieListByGenreIDFromDataBaseStream();
+
+  Stream<List<MovieVO>?> getTopRatedMoviesFromDatabaseStream();
+
+  Stream<List<MovieVO>?> getPopularMoviesFromDatabaseStream();
 
   Stream watchMovieBox();
 
