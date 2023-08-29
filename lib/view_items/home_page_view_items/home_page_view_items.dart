@@ -76,8 +76,7 @@ class SelectGenreTypeView extends StatelessWidget {
   }
 }
 
-/// banner movies item view and view
-
+/// Banner movies or auto slide movies item view and view
 class BannerMovieItemView extends StatelessWidget {
   const BannerMovieItemView({super.key});
 
@@ -162,9 +161,7 @@ class BannerMovieImageView extends StatelessWidget {
   }
 }
 
-/// genre movie list item view and view
-
-
+///Genre movie list item view and view
 class GenreMovieListItemView extends StatelessWidget {
   const GenreMovieListItemView({super.key});
 
@@ -184,7 +181,6 @@ class GenreMovieListItemView extends StatelessWidget {
   }
 }
 
-
 class GenreMovieListView extends StatelessWidget {
   const GenreMovieListView({super.key, required this.movieList});
 
@@ -200,8 +196,135 @@ class GenreMovieListView extends StatelessWidget {
               itemCount: movieList.length,
               controller: controller,
               itemBuilder: (_, index) {
-                return GenreMovieWidget(movieVO: movieList[index]);
+                return MovieWidget(movieVO: movieList[index]);
               });
         });
+  }
+}
+
+/// You may like or top rated movie item view and view
+class YouMayLikeItemView extends StatelessWidget {
+  const YouMayLikeItemView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<HomePageBloc, List<MovieVO>?>(
+      selector: (_, bloc) => bloc.getTopRatedMoviesList,
+      builder: (_, topRatedMoviesList, __) {
+        if (topRatedMoviesList == null) {
+          return const Center(child: LoadingWidget());
+        }
+        if (topRatedMoviesList.isEmpty) {
+          const Center(
+              child: EasyText(
+            text: kNoDataText,
+          ));
+        }
+        return TopRatedMoviesController(
+          movieList: topRatedMoviesList,
+        );
+      },
+    );
+  }
+}
+
+class TopRatedMoviesController extends StatelessWidget {
+  const TopRatedMoviesController({super.key, required this.movieList});
+
+  final List<MovieVO> movieList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<HomePageBloc, ScrollController>(
+      selector: (_, bloc) => bloc.controllerForTopRatedMovies,
+      builder: (_, controller, __) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const EasyText(
+              text: kYouMayLikeText,
+              fontSize: kFontSie21x,
+              fontWeight: FontWeight.w500,
+              color: kPrimaryTextColor,
+            ),
+            const SizedBox(
+              height: kSP20x,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  controller: controller,
+                  itemCount: movieList.length,
+                  itemBuilder: (_, index) =>
+                      MovieWidget(movieVO: movieList[index])),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+/// Popular Movies item views and view
+class PopularMoviesItemView extends StatelessWidget {
+  const PopularMoviesItemView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<HomePageBloc, List<MovieVO>?>(
+      selector: (_, bloc) => bloc.getPopularMoviesList,
+      builder: (_, popularMovieList, __) {
+        if (popularMovieList == null) {
+          return const Center(child: LoadingWidget());
+        }
+        if (popularMovieList.isEmpty){
+          const Center(child: EasyText(text: kNoDataText,));
+        }
+        return PopularMovieControllerView(
+          movieList: popularMovieList,
+        );
+      },
+    );
+  }
+}
+
+class PopularMovieControllerView extends StatelessWidget {
+  const PopularMovieControllerView({super.key, required this.movieList});
+
+  final List<MovieVO> movieList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<HomePageBloc, ScrollController>(
+      selector: (_, bloc) => bloc.controllerForPopularMovies,
+      builder: (_, controller, __) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const EasyText(
+              text: kPopularMoviesText,
+              fontSize: kFontSie21x,
+              fontWeight: FontWeight.w500,
+              color: kPrimaryTextColor,
+            ),
+            const SizedBox(
+              height: kSP20x,
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  controller: controller,
+                  itemCount: movieList.length,
+                  itemBuilder: (_, index) =>
+                      MovieWidget(movieVO: movieList[index])
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

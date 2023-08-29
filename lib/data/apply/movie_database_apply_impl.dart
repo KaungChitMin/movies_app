@@ -229,7 +229,7 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       _genreDAO.getGenresListByID(genresID);
 
   @override
-  Stream<List<MovieVO>?> getTopRatedMoviesFromDataBaseStream(int page) {
+  Stream<List<MovieVO>?> getTopRatedMoviesFromDataBaseStream() {
     return _movieDao
         .watchMovieBox()
         .startWith(_movieDao.getTopRatedMoviesFromDatabaseStream())
@@ -237,7 +237,7 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
   }
 
   @override
-  Stream<List<MovieVO>?> getPopularMoviesFromDataBaseStream(int page) {
+  Stream<List<MovieVO>?> getPopularMoviesFromDataBaseStream() {
     return _movieDao
         .watchMovieBox()
         .startWith(_movieDao.getPopularMoviesFromDatabaseStream())

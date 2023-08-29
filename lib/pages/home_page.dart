@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movies_database/pages/search_page.dart';
 import 'package:movies_database/utils/bloc_extension_utils.dart';
-import 'package:movies_database/view_items/home_page_view_items/gernre_list_view_item.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/home_page_bloc.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
+import '../view_items/home_page_view_items/home_page_view_items.dart';
 import '../widgets/search_bar_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,12 +21,13 @@ class HomePage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.07,
               ),
 
-              /// Search Bar Session
+              ///Search Bar Session
               SearchBarWidget(
                 onTap: () {
                   context.navigateToNextScreen(context, const SearchPage());
@@ -61,6 +62,29 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: kSP30x,
               ),
+
+              ///Top rated movies or You may like Session
+              Container(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: kSP20x, vertical: kSP10x),
+                height: kYouMayLikeAndPopularMoviesViewHeight,
+                child: const YouMayLikeItemView(),
+              ),
+              const SizedBox(
+                height: kSP30x,
+              ),
+
+              ///Popular movies session
+              Container(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: kSP20x, vertical: kSP10x),
+                height: kYouMayLikeAndPopularMoviesViewHeight,
+                child: const PopularMoviesItemView(),
+              ),
+              const SizedBox(
+                height: kSP30x,
+              ),
+
             ],
           ),
         ),

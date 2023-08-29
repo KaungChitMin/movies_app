@@ -98,9 +98,9 @@ abstract class MovieDatabaseApply{
 
   String getGenreListByID(List<int> genresID);
 
-  Stream <List<MovieVO>?> getTopRatedMoviesFromDataBaseStream(int page);
+  Stream <List<MovieVO>?> getTopRatedMoviesFromDataBaseStream();
 
-  Stream <List<MovieVO>?> getPopularMoviesFromDataBaseStream(int page);
+  Stream <List<MovieVO>?> getPopularMoviesFromDataBaseStream();
 
 
   Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID);
