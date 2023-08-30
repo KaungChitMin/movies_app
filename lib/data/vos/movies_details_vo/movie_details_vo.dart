@@ -131,7 +131,7 @@ class MovieDetailsVO {
   factory MovieDetailsVO.fromJson(Map<String, dynamic> json) =>
       _$MovieDetailsVOFromJson(json);
 
-  String getRunTime(){
+ String getRunTime(){
     int hour = (runtime ?? 0) ~/ 60;
     int minute = (runtime ?? 0) % 60;
     final runTimeHourAndMinutes = '${hour}h${minute}m';

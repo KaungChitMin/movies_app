@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_database/constant/colors.dart';
 import 'package:movies_database/constant/dimens.dart';
-import 'package:movies_database/utils/bloc_extension_utils.dart';
 import 'package:movies_database/widgets/easy_image_widget.dart';
 import 'package:movies_database/widgets/easy_text_widget.dart';
 
@@ -11,11 +10,13 @@ class SliverAppBarItemView extends StatelessWidget {
     required this.movieName,
     required this.imageUrl,
     required this.onTapBack,
+    required this.runTime,
   });
 
   final String movieName;
   final String imageUrl;
   final Function onTapBack;
+  final String runTime;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class SliverAppBarItemView extends StatelessWidget {
       backgroundColor: kPrimaryBackgroundColor,
       expandedHeight: kSliverAppBarActorDetailsHeight,
       flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
         title: Hero(
           transitionOnUserGestures: true,
           tag: movieName,
@@ -65,6 +67,16 @@ class SliverAppBarItemView extends StatelessWidget {
               ),
             ),
           ),
+
+          Align(
+            alignment: Alignment.bottomRight,
+           child: EasyText(
+             text: runTime,
+             color: Colors.amber,
+             fontWeight: FontWeight.w700,
+             fontSize: 30,
+           )
+          )
         ]),
       ),
     );
