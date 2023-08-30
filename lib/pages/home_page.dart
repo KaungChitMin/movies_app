@@ -6,7 +6,12 @@ import 'package:provider/provider.dart';
 import '../bloc/home_page_bloc.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
-import '../view_items/home_page_view_items/home_page_view_items.dart';
+import '../view_items/home_page_view_items/actor_list_view_items.dart';
+import '../view_items/home_page_view_items/banner_movie_item_view.dart';
+import '../view_items/home_page_view_items/genre_movie_list_item_view.dart';
+import '../view_items/home_page_view_items/genre_movie_type_item_view.dart';
+import '../view_items/home_page_view_items/popular_movies_item_view.dart';
+import '../view_items/home_page_view_items/top_rated_movies_item_view.dart';
 import '../widgets/search_bar_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -48,43 +53,40 @@ class HomePage extends StatelessWidget {
                   height: 250,
                   width: double.infinity,
                   child: BannerMovieItemView()),
-              const SizedBox(
-                height: kSP30x,
-              ),
 
               ///Movie by Genres Session
               Container(
                 margin: const EdgeInsets.symmetric(
-                    horizontal: kSP20x, vertical: kSP10x),
+                    horizontal: kSP20x, vertical: kSP40x),
                 height: kMovieByGenresHeight,
                 child: const GenreMovieListItemView(),
-              ),
-              const SizedBox(
-                height: kSP30x,
               ),
 
               ///Top rated movies or You may like Session
               Container(
                 margin: const EdgeInsets.symmetric(
-                    horizontal: kSP20x, vertical: kSP10x),
+                    horizontal: kSP20x, vertical: kSP40x),
                 height: kYouMayLikeAndPopularMoviesViewHeight,
                 child: const YouMayLikeItemView(),
-              ),
-              const SizedBox(
-                height: kSP30x,
               ),
 
               ///Popular movies session
               Container(
                 margin: const EdgeInsets.symmetric(
-                    horizontal: kSP20x, vertical: kSP10x),
+                    horizontal: kSP20x, vertical: kSP40x),
                 height: kYouMayLikeAndPopularMoviesViewHeight,
                 child: const PopularMoviesItemView(),
+              ),
+
+              ///Actor session
+              Container(
+                margin: const EdgeInsets.symmetric(
+                    horizontal: kSP10x, vertical: kSP40x),
+                child: const ActorListItemView(),
               ),
               const SizedBox(
                 height: kSP30x,
               ),
-
             ],
           ),
         ),

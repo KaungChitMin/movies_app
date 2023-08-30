@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movies_database/data/apply/movie_database_apply.dart';
 import 'package:movies_database/data/apply/movie_database_apply_impl.dart';
+import 'package:movies_database/data/vos/actor_vo/actor_vo.dart';
 
 import '../data/vos/genre_vo/genre_vo.dart';
 import '../data/vos/movie_vo/movie_vo.dart';
@@ -20,10 +21,12 @@ class HomePageBloc extends ChangeNotifier {
   List<GenreVO>? _genreMovieType = [];
   List<MovieVO>? _topRatedMoviesList = [];
   List<MovieVO>? _popularMoviesList = [];
+  List<ActorVO>? _actorList = [];
 
   int _pageForGenreMovie = 1;
   int _pageForTopRatedMovie = 1;
   int _pageForPopularMovie = 1;
+  int _pageForActor = 1;
   int genreID = 0;
 
   /// Getter
@@ -33,10 +36,11 @@ class HomePageBloc extends ChangeNotifier {
 
   List<GenreVO>? get getGenreMovieType => _genreMovieType;
 
-
   List<MovieVO>? get getTopRatedMoviesList => _topRatedMoviesList;
 
   List<MovieVO>? get getPopularMoviesList => _popularMoviesList;
+
+  List<ActorVO>? get getActorList => _actorList;
 
   ScrollController get controllerForGenreMovies => _controllerForGenreMovies;
 
@@ -58,6 +62,9 @@ class HomePageBloc extends ChangeNotifier {
 
     /// get popular  movies from network
     _apply.getPopularMoviesFromNetwork(_pageForPopularMovie);
+    
+    /// get actor list from network
+    _apply.getActorListFromNetwork(_pageForActor);
 
     /// listen genre list from database
     _apply.getGenresListFromDataBase().listen((event) {
@@ -95,6 +102,20 @@ class HomePageBloc extends ChangeNotifier {
       }
       notifyListeners();
     });
+    
+    /// listen actor list from database
+    _apply.getActorListFromDatabaseStream().listen((event) { 
+      if(event != null){
+        _actorList= event;
+      } else if (event == null)
+      {
+        _actorList=null;
+      }
+      else{
+        _actorList=[];
+      }
+      notifyListeners();
+    });
 
     /// Listen movies by genreId on scrollController
     _controllerForGenreMovies.addListener(() {
@@ -107,7 +128,6 @@ class HomePageBloc extends ChangeNotifier {
       }
       notifyListeners();
     });
-
 
     /// Listen top rated movies on scrollController
     _controllerForTopRatedMovies.addListener(() {
@@ -134,7 +154,13 @@ class HomePageBloc extends ChangeNotifier {
   });
   }
 
-
+  void checkIndexForActor(int index){
+    if(index != 0 && index % 10 ==0){
+      _pageForActor++;
+      _apply.getActorListFromNetwork(_pageForActor);
+    }
+    
+  }
 
   void genreTitleSelect(int selectId) {
     _apply.clearMoviesByGenresID();

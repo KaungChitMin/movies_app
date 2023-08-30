@@ -56,6 +56,16 @@ class MovieDaoImpl extends MovieDAO {
         .toList();
   }
 
+  @override
+  List<MovieVO>? getSimilarMoviesFromDatabase() {
+    final movieList = _getMovieBox().values.toList();
+    movieList.sort((a, b) => a.order.compareTo(b.order));
+
+    return movieList
+        .where((element) => element.isSimilarMovies ?? false)
+        .toList();
+  }
+
   /// Database Stream
   @override
   Stream<List<MovieVO>?> getMovieListByGenreIDFromDataBaseStream() =>
@@ -66,8 +76,12 @@ class MovieDaoImpl extends MovieDAO {
       Stream.value(getTopRatedMoviesFromDatabase());
 
   @override
-  Stream<List<MovieVO>?> getPopularMoviesFromDatabaseStream()=>
+  Stream<List<MovieVO>?> getPopularMoviesFromDatabaseStream() =>
       Stream.value(getPopularMoviesFromDatabase());
+
+  @override
+  Stream<List<MovieVO>?> getSimilarMoviesFromDatabaseStream() =>
+      Stream.value(getSimilarMoviesFromDatabase());
 
   /// Watch box and Clear box
   @override
@@ -89,5 +103,17 @@ class MovieDaoImpl extends MovieDAO {
     }
   }
 
+  @override
+  void clearSimilarMoviesBox() {
+    final movieList = _getMovieBox().values.toList();
 
+    final movieID = movieList
+        .where((element) => element.isSimilarMovies ?? false)
+        .map((e) => e.id)
+        .toList();
+
+    for (int? id in movieID) {
+      _getMovieBox().delete(id);
+    }
+  }
 }

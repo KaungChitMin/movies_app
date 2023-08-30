@@ -10,11 +10,11 @@ class MovieDetailsDaoImpl extends MovieDetailsDAO {
 
   factory MovieDetailsDaoImpl() => _singleton;
 
-  /// Box
+  ///Box
   Box<MovieDetailsVO> _getMovieDetailsBox() =>
-      Hive.box<MovieDetailsVO>(kBoxNameForActorDetailsVO);
+      Hive.box<MovieDetailsVO>(kBoxNameForMovieDetailsVO);
 
-  ///
+  ///Database
   @override
   void save(MovieDetailsVO movieDetailsVO) {
     _getMovieDetailsBox().put(movieDetailsVO.id, movieDetailsVO);
@@ -24,10 +24,14 @@ class MovieDetailsDaoImpl extends MovieDetailsDAO {
   MovieDetailsVO? getMovieDetailVOFromDatabase(int movieID) =>
       _getMovieDetailsBox().get(movieID);
 
+  ///Database stream
   @override
   Stream<MovieDetailsVO?> getMovieDetailsVOFromDatabaseStream(int movieID) =>
       Stream.value(getMovieDetailVOFromDatabase(movieID));
 
+  ///Watch box
   @override
   Stream watchMovieDetailsBox() => _getMovieDetailsBox().watch();
 }
+
+

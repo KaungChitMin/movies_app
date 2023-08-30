@@ -69,23 +69,39 @@
 //   void clearSimilarMovies();
 // }
 
+import 'package:movies_database/data/vos/actor_details_vo/actor_details_vo.dart';
+import 'package:movies_database/data/vos/actor_vo/actor_vo.dart';
+
+import '../vos/credit_vo/cast_vo/cast_vo.dart';
+import '../vos/credit_vo/cast_vo/crew_vo.dart';
 import '../vos/genre_vo/genre_vo.dart';
 import '../vos/movie_vo/movie_vo.dart';
 import '../vos/movies_details_vo/movie_details_vo.dart';
 
-abstract class MovieDatabaseApply{
+abstract class MovieDatabaseApply {
   /// From Network
   Future<List<MovieVO>?> getSearchMoviesFromNetwork(int page, String query);
 
-  Future<List<MovieVO>?> getMovieListByGenresIDFromNetwork(int genreID, int page);
+  Future<List<MovieVO>?> getMovieListByGenresIDFromNetwork(
+      int genreID, int page);
 
   Future<List<GenreVO>?> getGenresListFromNetwork();
 
-  Future <List<MovieVO>?> getTopRatedMoviesFromNetwork(int page);
+  Future<List<MovieVO>?> getTopRatedMoviesFromNetwork(int page);
 
-  Future <List<MovieVO>?> getPopularMoviesFromNetwork(int page);
+  Future<List<MovieVO>?> getPopularMoviesFromNetwork(int page);
+
+  Future<List<ActorVO>?> getActorListFromNetwork(int page);
+
+  Future<ActorDetailsVO?> getActorDetailsVO(int actorID);
 
   Future<MovieDetailsVO?> getMovieDetailsVoFromNetwork(int movieID);
+
+  Future<List<CastVO>?> getCastList(int movieID);
+
+  Future<List<CrewVO>?> getCrewList(int movieID);
+
+  Future<List<MovieVO>?> getSimilarMoviesList(int page, int movieID);
 
   /// From DataBase
   void save(String query);
@@ -98,12 +114,21 @@ abstract class MovieDatabaseApply{
 
   String getGenreListByID(List<int> genresID);
 
-  Stream <List<MovieVO>?> getTopRatedMoviesFromDataBaseStream();
+  Stream<List<MovieVO>?> getTopRatedMoviesFromDataBaseStream();
 
-  Stream <List<MovieVO>?> getPopularMoviesFromDataBaseStream();
+  Stream<List<MovieVO>?> getPopularMoviesFromDataBaseStream();
 
+  Stream<List<ActorVO>?> getActorListFromDatabaseStream();
+
+  Stream<ActorDetailsVO?> getActorDetailsVOFromDatabaseStream(int actorID);
 
   Stream<MovieDetailsVO?> getMovieDetailsVoFromDataBase(int movieID);
+
+  Stream<List<CastVO>?> getCastListFromDatabaseStream();
+
+  Stream<List<CrewVO>?> getCrewListFromDatabaseStream();
+
+  Stream<List<MovieVO>?> getSimilarMoviesListFromDatabaseStream();
 
   ///Clear Box
   void clearMoviesBox();
@@ -111,8 +136,8 @@ abstract class MovieDatabaseApply{
   void clearGenreBox();
 
   void clearMoviesByGenresID();
+
+  void clearActorBox();
+
+  void clearSimilarMoviesBox();
 }
-
-
-
-

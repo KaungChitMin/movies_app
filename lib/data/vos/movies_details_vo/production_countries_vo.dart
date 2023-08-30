@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import '../../../constant/hive_constant.dart';
 
 part 'production_countries_vo.g.dart';

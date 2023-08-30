@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-
 ///Spacing and Padding
 const double kSP5x = 5.0;
 const double kSP10x = 10.0;
 const double kSP15x = 15.0;
 const double kSP20x = 20.0;
 const double kSP30x = 30.0;
-const double kSP70x = 70.0;
+const double kSP40x = 40.0;
+const double kSP70x = 50.0;
 
 ///App Specific
 const double kSearchIconSize = 30.0;

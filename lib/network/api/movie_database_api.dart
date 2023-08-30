@@ -53,9 +53,8 @@ abstract class MovieDBApi {
 
   @GET(kMovieDetailsEndPoint)
   Future<MovieDetailsVO> getMovieDetailsResponse(
-    @Query(kQueryParamsApiKey) String apiKey,
-    @Query(kPathParameterForMovieID) int movieID,
-  );
+      @Query(kQueryParamsApiKey) String apiKey,
+      @Path(kPathParameterForMovieID) int movieID);
 
   @GET(kCreditsEndPoint)
   Future<CastAndCrewResponse> getCastAndCrewResponse(

@@ -9,16 +9,14 @@ const int kHiveTypeIDForProductionCompanies = 7;
 const int kHiveTypeIDForProductionCountries = 8;
 const int kHiveTypeIDForCastVO = 9;
 const int kHiveTypeIDForCrewVO = 10;
-const int kHiveTypeIdForBelongsToCollection = 11;
-const int kHiveTypeIdForSpokenLanguages = 12;
-const int kHiveTypeIDForGenresVO = 13;
+
 
 ///Box Name
 const String kBoxNameForMovieVO = 'MOVIE_VO_FRO_MOVIE_VO';
 const String kBoxNameForGenreVO = 'MOVIE_VO_FRO_GENRE_VO';
 const String kBoxNameForActorVO = 'MOVIE_VO_FRO_ACTOR_VO';
-const String kBoxNameForActorDetailsVO = 'MOVIE_VO_FRO_ACTOR_DETAILS_VO';
+const String kBoxNameForActorDetailsVO = 'ACTOR_DETAILS_VO';
 const String kBoxNameForSearchHistoryVO = 'MOVIE_VO_FOR_SEARCH_HISTORY_VO';
-const String kBoxNameForMovieDetailsVO = 'MOVIE_VO_FOR_MOVIE_DETAILS_VO';
+const String kBoxNameForMovieDetailsVO = 'MOVIE_DETAILS_VO';
 const String kBoxNameForCastVO = 'MOVIE_VO_FOR_CAST_VO';
 const String kBoxNameForCrewVO = 'MOVIE_VO_FOR_CREW_VO';

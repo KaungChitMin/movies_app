@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:movies_database/data/vos/movies_details_vo/belongs_to_vo.dart';
-import 'package:movies_database/data/vos/movies_details_vo/genres_vo.dart';
-import 'package:movies_database/data/vos/movies_details_vo/spoken_language_vo.dart';
 import 'package:movies_database/pages/home_page.dart';
 
 import 'constant/hive_constant.dart';
@@ -25,25 +22,22 @@ main() async {
   Hive.registerAdapter(MovieVOAdapter());
   Hive.registerAdapter(GenreVOAdapter());
   Hive.registerAdapter(ActorVOAdapter());
+  Hive.registerAdapter(KnownForVOAdapter());
+  Hive.registerAdapter(ActorDetailsVOAdapter());
   Hive.registerAdapter(MovieDetailsVOAdapter());
-  // Hive.registerAdapter(KnownForVOAdapter());
-  // Hive.registerAdapter(ActorDetailsVOAdapter());
   Hive.registerAdapter(ProductionCompaniesVOAdapter());
   Hive.registerAdapter(ProductionCountriesVOAdapter());
-  // Hive.registerAdapter(CastVOAdapter());
-  // Hive.registerAdapter(CrewVOAdapter());
-  Hive.registerAdapter(GenresVOAdapter());
-  Hive.registerAdapter(BelongsToCollectionVOAdapter());
-  Hive.registerAdapter(SpokenLanguagesVOAdapter());
+  Hive.registerAdapter(CastVOAdapter());
+  Hive.registerAdapter(CrewVOAdapter());
 
   await Hive.openBox<MovieVO>(kBoxNameForMovieVO);
   await Hive.openBox<GenreVO>(kBoxNameForGenreVO);
   await Hive.openBox<ActorVO>(kBoxNameForActorVO);
-  //await Hive.openBox<ActorDetailsVO>(kBoxNameForActorDetailsVO);
-  await Hive.openBox<String>(kBoxNameForSearchHistoryVO);
   await Hive.openBox<MovieDetailsVO>(kBoxNameForMovieDetailsVO);
-  // await Hive.openBox<CastVO>(kBoxNameForCastVO);
-  // await Hive.openBox<CrewVO>(kBoxNameForCrewVO);
+  await Hive.openBox<ActorDetailsVO>(kBoxNameForActorDetailsVO);
+  await Hive.openBox<String>(kBoxNameForSearchHistoryVO);
+  await Hive.openBox<CastVO>(kBoxNameForCastVO);
+  await Hive.openBox<CrewVO>(kBoxNameForCrewVO);
   runApp(const MyApp());
 }
 

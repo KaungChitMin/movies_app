@@ -252,10 +252,7 @@ class _MovieDBApi implements MovieDBApi {
     int movieID,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'api_key': apiKey,
-      r'movie_id': movieID,
-    };
+    final queryParameters = <String, dynamic>{r'api_key': apiKey};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -266,7 +263,7 @@ class _MovieDBApi implements MovieDBApi {
     )
             .compose(
               _dio.options,
-              '/movie/{movie_id}',
+              '/movie/${movieID}',
               queryParameters: queryParameters,
               data: _data,
             )

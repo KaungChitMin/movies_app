@@ -1,11 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:movies_database/constant/hive_constant.dart';
-import 'package:movies_database/data/vos/movies_details_vo/spoken_language_vo.dart';
+import 'package:movies_database/data/vos/movies_details_vo/production_companies_vo.dart';
 
-import 'belongs_to_vo.dart';
-import 'genres_vo.dart';
-import 'production_companies_vo.dart';
+import '../../../constant/hive_constant.dart';
+import '../genre_vo/genre_vo.dart';
 import 'production_countries_vo.dart';
 
 part 'movie_details_vo.g.dart';
@@ -21,102 +19,93 @@ class MovieDetailsVO {
   @HiveField(1)
   String? backdropPath;
 
-  @JsonKey(name: 'belongs_to_collection')
-  @HiveField(2)
-  BelongsToCollectionVO? belongsToCollection;
-
   @JsonKey(name: 'budget')
-  @HiveField(3)
+  @HiveField(2)
   int? budget;
 
   @JsonKey(name: 'genres')
-  @HiveField(4)
-  List<GenresVO>? genres;
+  @HiveField(3)
+  List<GenreVO>? genres;
 
   @JsonKey(name: 'homepage')
-  @HiveField(5)
+  @HiveField(4)
   String? homepage;
 
   @JsonKey(name: 'id')
-  @HiveField(6)
+  @HiveField(5)
   int? id;
 
   @JsonKey(name: 'imdb_id')
-  @HiveField(7)
+  @HiveField(6)
   String? imdbId;
 
   @JsonKey(name: 'original_language')
-  @HiveField(8)
+  @HiveField(7)
   String? originalLanguage;
 
   @JsonKey(name: 'original_title')
-  @HiveField(9)
+  @HiveField(8)
   String? originalTitle;
 
   @JsonKey(name: 'overview')
-  @HiveField(10)
+  @HiveField(9)
   String? overview;
 
   @JsonKey(name: 'popularity')
-  @HiveField(11)
+  @HiveField(10)
   double? popularity;
 
   @JsonKey(name: 'poster_path')
-  @HiveField(12)
+  @HiveField(11)
   String? posterPath;
 
   @JsonKey(name: 'production_companies')
-  @HiveField(13)
+  @HiveField(12)
   List<ProductionCompaniesVO>? productionCompanies;
 
   @JsonKey(name: 'production_countries')
-  @HiveField(14)
+  @HiveField(13)
   List<ProductionCountriesVO>? productionCountries;
 
   @JsonKey(name: 'release_date')
-  @HiveField(15)
+  @HiveField(14)
   String? releaseDate;
 
   @JsonKey(name: 'revenue')
-  @HiveField(16)
+  @HiveField(15)
   int? revenue;
 
   @JsonKey(name: 'runtime')
-  @HiveField(17)
+  @HiveField(16)
   int? runtime;
 
-  @JsonKey(name: 'spoken_languages')
-  @HiveField(18)
-  List<SpokenLanguagesVO>? spokenLanguages;
-
   @JsonKey(name: 'status')
-  @HiveField(19)
+  @HiveField(17)
   String? status;
 
   @JsonKey(name: 'tagline')
-  @HiveField(20)
+  @HiveField(18)
   String? tagline;
 
   @JsonKey(name: 'title')
-  @HiveField(21)
+  @HiveField(19)
   String? title;
 
   @JsonKey(name: 'video')
-  @HiveField(22)
+  @HiveField(20)
   bool? video;
 
   @JsonKey(name: 'vote_average')
-  @HiveField(23)
-  double? voteAverage;
+  @HiveField(21)
+  num? voteAverage;
 
   @JsonKey(name: 'vote_count')
-  @HiveField(24)
+  @HiveField(22)
   int? voteCount;
 
   MovieDetailsVO(
       this.adult,
       this.backdropPath,
-      this.belongsToCollection,
       this.budget,
       this.genres,
       this.homepage,
@@ -132,7 +121,6 @@ class MovieDetailsVO {
       this.releaseDate,
       this.revenue,
       this.runtime,
-      this.spokenLanguages,
       this.status,
       this.tagline,
       this.title,
@@ -142,4 +130,21 @@ class MovieDetailsVO {
 
   factory MovieDetailsVO.fromJson(Map<String, dynamic> json) =>
       _$MovieDetailsVOFromJson(json);
+
+  String getRunTime(){
+    int hour = (runtime ?? 0) ~/ 60;
+    int minute = (runtime ?? 0) % 60;
+    final runTimeHourAndMinutes = '${hour}h${minute}m';
+    return runTimeHourAndMinutes;
+  }
+
+  List<String> getMovieGenresAndRunTime() {
+    List<String> result = [];
+    final genresList = genres?.map((e) => e.name ?? '').toList();
+
+    for (String genres in genresList ?? []) {
+      result.add(genres);
+    }
+    return result;
+  }
 }

@@ -4,7 +4,7 @@ import '../constant/colors.dart';
 import '../constant/dimens.dart';
 import '../data/vos/movie_vo/movie_vo.dart';
 import '../pages/details_page.dart';
-import '../view_items/home_page_view_items/home_page_view_items.dart';
+import '../view_items/home_page_view_items/banner_movie_item_view.dart';
 import 'easy_text_widget.dart';
 import 'gradient_widget.dart';
 

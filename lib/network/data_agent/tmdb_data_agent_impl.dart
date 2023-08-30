@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:movies_database/constant/api_constant.dart';
+import 'package:movies_database/data/vos/actor_details_vo/actor_details_vo.dart';
+import 'package:movies_database/data/vos/actor_vo/actor_vo.dart';
+import 'package:movies_database/data/vos/credit_vo/cast_vo/cast_vo.dart';
+import 'package:movies_database/data/vos/credit_vo/cast_vo/crew_vo.dart';
 import 'package:movies_database/data/vos/genre_vo/genre_vo.dart';
 import 'package:movies_database/data/vos/movie_vo/movie_vo.dart';
 import 'package:movies_database/data/vos/movies_details_vo/movie_details_vo.dart';
@@ -53,6 +57,39 @@ class MovieDataAgentImpl extends MovieDataAgent {
       .first;
 
   @override
+  Future<List<ActorVO>?> getActorList(int page) => _movieApi
+      .getActorResponse(kApiToken, page)
+      .asStream()
+      .map((event) => event.results)
+      .first;
+
+  @override
+  Future<ActorDetailsVO?> getActorDetailsVo(int actorID) =>
+      _movieApi.getActorDetailsResponse(kApiToken, actorID);
+
+  @override
   Future<MovieDetailsVO?> getMovieDetailsVO(int movieID) =>
       _movieApi.getMovieDetailsResponse(kApiToken, movieID);
+
+  @override
+  Future<List<CastVO>?> getCastList(int movieID) => _movieApi
+      .getCastAndCrewResponse(kApiToken, movieID)
+      .asStream()
+      .map((event) => event.cast)
+      .first;
+
+  @override
+  Future<List<CrewVO>?> getCrewList(int movieID) => _movieApi
+      .getCastAndCrewResponse(kApiToken, movieID)
+      .asStream()
+      .map((event) => event.crew)
+      .first;
+
+  @override
+  Future<List<MovieVO>?> getSimilarMoviesList(int page, int movieID) =>
+      _movieApi
+          .getSimilarResponse(kApiToken, page, movieID)
+          .asStream()
+          .map((event) => event.results)
+          .first;
 }

@@ -24,7 +24,7 @@ const String kPathParameterForMovieID = 'movie_id';
 const String kPathParameterFoActorID = 'actor_id';
 
 ///API Token
-const String kApiToken = '6ba57a8fa213613268b61de49d70fffe';
+const String kApiToken = '20e035b39e8c32f801141784a5f68809';
 
 ///Image Prefix Link
 const String kImagePrefixLink = 'https://image.tmdb.org/t/p/w500';
