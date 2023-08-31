@@ -1,4 +1,4 @@
-const String kAppTitle = 'TMDB Movie App';
+const String kAppTitle = 'Movie App';
 const String kSearchMoviesText = 'Search movies...';
 const String kNoDataText = 'No Data in Database';
 const String kYouMayLikeText = 'You may like';

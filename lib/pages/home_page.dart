@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
 
               ///Banner Session
               const SizedBox(
-                  height: 250,
+                  height: 350,
                   width: double.infinity,
                   child: BannerMovieItemView()),
 

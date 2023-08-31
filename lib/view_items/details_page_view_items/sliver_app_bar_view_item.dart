@@ -50,12 +50,13 @@ class SliverAppBarItemView extends StatelessWidget {
           ),
 
 
-         Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kSP20x,vertical: kSP70x),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: kSP20x, vertical: kSP50x),
             child: Align(
               alignment: Alignment.topLeft,
               child: GestureDetector(
-                onTap: ()=>onTapBack(),
+                onTap: () => onTapBack(),
                 child: const CircleAvatar(
                   radius: kBackButtonSize,
                   backgroundColor: kSecondaryBackgroundColor,
@@ -68,14 +69,16 @@ class SliverAppBarItemView extends StatelessWidget {
             ),
           ),
 
-          Align(
-            alignment: Alignment.bottomRight,
-           child: EasyText(
-             text: runTime,
-             color: Colors.amber,
-             fontWeight: FontWeight.w700,
-             fontSize: 30,
-           )
+
+          Padding(
+            padding: const EdgeInsets.only(right: 20,top: 60),
+            child: Align(
+                alignment: Alignment.topRight,
+                child: EasyText(
+                  text: runTime,
+                  fontWeight: FontWeight.w700,
+                  fontSize: kSP20x,
+                )),
           )
         ]),
       ),

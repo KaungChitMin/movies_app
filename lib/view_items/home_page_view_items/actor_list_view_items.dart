@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_database/constant/strings.dart';
+import 'package:movies_database/pages/actor_details_page.dart';
+import 'package:movies_database/utils/bloc_extension_utils.dart';
 import 'package:movies_database/widgets/easy_image_widget.dart';
 import 'package:movies_database/widgets/easy_text_widget.dart';
 import 'package:movies_database/widgets/loading_widget.dart';
@@ -11,7 +13,8 @@ import '../../data/vos/actor_vo/actor_vo.dart';
 import '../../widgets/gradient_widget.dart';
 
 class ActorListItemView extends StatelessWidget {
-  const ActorListItemView({super.key});
+  const ActorListItemView({super.key,});
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +32,23 @@ class ActorListItemView extends StatelessWidget {
         return CarouselSlider.builder(
           itemCount: actorList.length,
           options: CarouselOptions(
+            onPageChanged: (int index,_){
+              context.getHomePageBlocInstance().checkIndexForActor(index);
+            },
             aspectRatio: 1.1,
             autoPlay: true,
             enableInfiniteScroll: true,
             enlargeCenterPage: true,
             scrollDirection: Axis.horizontal,
           ),
-          itemBuilder: (_, index, __) {
-            return ActorImageAndNameView(
-              actorVo: actorList[index],
+          itemBuilder: (context, index, __) {
+            return GestureDetector(
+              onTap: (){
+                context.navigateToNextScreen(context, ActorDetailsPage(actorID: actorList[index].id ?? 0));
+              },
+              child: ActorImageAndNameView(
+                actorVo: actorList[index],
+              ),
             );
           },
         );

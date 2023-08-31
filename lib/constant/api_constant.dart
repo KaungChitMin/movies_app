@@ -32,3 +32,4 @@ const String kImagePrefixLink = 'https://image.tmdb.org/t/p/w500';
 ///Default Image
 const String kDefaultImage =
     'https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png';
+

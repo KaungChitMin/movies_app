@@ -80,7 +80,7 @@ class MovieNameRatingAndVoteView extends StatelessWidget {
                 const SizedBox(width: kSP5x),
                 EasyText(text: rating.toString(), fontWeight: FontWeight.w600),
                 const SizedBox(
-                  width: kSP20x,
+                  width: kSP10x,
                 ),
                 EasyText(
                   text: '$voteCount vote'.addS(),

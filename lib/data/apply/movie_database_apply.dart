@@ -97,11 +97,11 @@ abstract class MovieDatabaseApply {
 
   Future<MovieDetailsVO?> getMovieDetailsVoFromNetwork(int movieID);
 
-  Future<List<CastVO>?> getCastList(int movieID);
+  Future<List<CastVO>?> getCastListFromNetWork(int movieID);
 
-  Future<List<CrewVO>?> getCrewList(int movieID);
+  Future<List<CrewVO>?> getCrewListFromNetWork(int movieID);
 
-  Future<List<MovieVO>?> getSimilarMoviesList(int page, int movieID);
+  Future<List<MovieVO>?> getSimilarMoviesListFromNetWork(int page, int movieID);
 
   /// From DataBase
   void save(String query);

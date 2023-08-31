@@ -129,7 +129,7 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       });
 
   @override
-  Future<List<CastVO>?> getCastList(int movieID) =>
+  Future<List<CastVO>?> getCastListFromNetWork(int movieID) =>
       _dataAgent.getCastList(movieID).then((value) {
         if (value != null) {
           _castDao.save(value);
@@ -138,7 +138,7 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       });
 
   @override
-  Future<List<CrewVO>?> getCrewList(int movieID) =>
+  Future<List<CrewVO>?> getCrewListFromNetWork(int movieID) =>
       _dataAgent.getCrewList(movieID).then((value) {
         if (value != null) {
           _crewDao.save(value);
@@ -147,7 +147,7 @@ class MovieDataBaseApplyImpl extends MovieDatabaseApply {
       });
 
   @override
-  Future<List<MovieVO>?> getSimilarMoviesList(int page, int movieID) =>
+  Future<List<MovieVO>?> getSimilarMoviesListFromNetWork(int page, int movieID) =>
       _dataAgent.getSimilarMoviesList(page, movieID).then((value) {
         if (value != null) {
           var temp = value;
